@@ -1,0 +1,87 @@
+/******************************************************************************
+    サービスアイコン
+        サービスアイコン リソースヘッダファイル
+            Copyright(C) 2007 Wraith.   All rights reserved.
+                                            Coded by Wraith in Jul 30, 2007.
+******************************************************************************/
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//  ■ svcicon.rh
+//      http://tricklib.com/cxx/ex/svcicon/svcicon.rh
+//
+//  □ 関連ファイル
+//      ソースファイル
+//      http://tricklib.com/cxx/ex/svcicon/svcicon.cpp
+//      リソースファイル
+//      http://tricklib.com/cxx/ex/svcicon/svcicon.rc
+//      アプリケーションアイコン
+//      http://tricklib.com/cxx/ex/svcicon/svcicon.ico
+//      デフォルトサービスアイコン
+//      http://tricklib.com/cxx/ex/svcicon/svc.ico
+//      UACオーバーレイアイコン
+//      http://tricklib.com/cxx/ex/svcicon/miniuac.ico
+//      "start"アイコン
+//      http://tricklib.com/cxx/ex/svcicon/start.ico
+//      "pause"アイコン
+//      http://tricklib.com/cxx/ex/svcicon/pause.ico
+//      "stop"アイコン
+//      http://tricklib.com/cxx/ex/svcicon/stop.ico
+//      "resume"アイコン
+//      http://tricklib.com/cxx/ex/svcicon/resume.ico
+//      "restart"アイコン
+//      http://tricklib.com/cxx/ex/svcicon/restart.ico
+//      "閉じる"アイコン
+//      http://tricklib.com/cxx/ex/svcicon/close.ico
+//      "start pending"オーバーレイアイコン
+//      http://tricklib.com/cxx/ex/svcicon/start_pending.ico
+//      "running"オーバーレイアイコン
+//      http://tricklib.com/cxx/ex/svcicon/running.ico
+//      "pause pending"オーバーレイアイコン
+//      http://tricklib.com/cxx/ex/svcicon/pause_pending.ico
+//      "paused"オーバーレイアイコン
+//      http://tricklib.com/cxx/ex/svcicon/paused.ico
+//      "continue pending"オーバーレイアイコン
+//      http://tricklib.com/cxx/ex/svcicon/continue_pending.ico
+//      "stop pending"オーバーレイアイコン
+//      http://tricklib.com/cxx/ex/svcicon/stop_pending.ico
+//      "stopped"オーバーレイアイコン
+//      http://tricklib.com/cxx/ex/svcicon/stopped.ico
+//      全ファイルパック
+//      http://tricklib.com/cxx/ex/svcicon/svcicon.zip
+//
+//  □ リファレンス・サポートページ
+//      http://tricklib.com/cxx/ex/svcicon/
+//
+//  □ ライセンス情報
+//      http://tricklib.com/license.htm
+//
+
+#define APPLICATION_ICON        100
+
+#define DEFAULT_SERVICE_ICON    101
+#define UAC_ICON                102
+#define MINI_UAC_ICON           103
+
+#define DO_START_ICON           201
+#define DO_PAUSE_ICON           202
+#define DO_STOP_ICON            203
+#define DO_RESUME_ICON          204
+#define DO_RESTART_ICON         205
+#define DISPLAY_PROPERTY_ICON   206
+#define DO_CLOSE_ICON           207
+
+#define START_PENDING_ICON      301
+#define RUNNING_ICON            302
+#define PAUSE_PENDING_ICON      303
+#define PAUSED_ICON             304
+#define CONTINUE_PENDING_ICON   305
+#define STOP_PENDING_ICON       306
+#define STOPPED_ICON            307
+
+#define NOTIFYICON_MENU         100
+
+/******************************************************************************
+    □■□■                  Wraith the Trickster                  □■□■
+    ■□■□ ～I'll go with heaven's advantage and fool's wisdom.～ ■□■□
+******************************************************************************/
