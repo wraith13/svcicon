@@ -334,7 +334,7 @@ public:
         SERVICE_STATUS service_status = { 0, };
         if (!ControlService(handle, dwControl, &service_status))
         {
-            OutputDebugString("ControlService: faild");
+            OutputDebugString(_T("ControlService: faild"));
             OutputDebugString(make_error_message().c_str());
         }
         return service_status.dwCurrentState;
@@ -785,7 +785,7 @@ namespace service_icon
                 HICON icon = load_icon(mii.wID);
                 if (!icon)
                 {
-                    OutputDebugString("LoadImage: faild");
+                    OutputDebugString(_T("LoadImage: faild"));
                     OutputDebugString(make_error_message().c_str());
                     continue;
                 }
@@ -817,7 +817,7 @@ namespace service_icon
                 }
                 if (!SetMenuItemInfo(notify_icon_menu, i, TRUE, &mii))
                 {
-                    OutputDebugString("SetMenuItemInfo: faild");
+                    OutputDebugString(_T("SetMenuItemInfo: faild"));
                     OutputDebugString(make_error_message().c_str());
                 }
             }
@@ -1199,7 +1199,7 @@ namespace service_icon
                             }
                             if (!SetMenuItemInfo(notify_icon_menu, i, TRUE, &mii))
                             {
-                                OutputDebugString("SetMenuItemInfo: faild");
+                                OutputDebugString(_T("SetMenuItemInfo: faild"));
                                 OutputDebugString(make_error_message().c_str());
                             }
                         }
@@ -1363,7 +1363,7 @@ namespace service_icon
             }
             else
             {
-                OutputDebugString("CreateWindow: faild");
+                OutputDebugString(_T("CreateWindow: faild"));
                 OutputDebugString(make_error_message().c_str());
             }
         }
