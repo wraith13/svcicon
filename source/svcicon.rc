@@ -74,27 +74,27 @@
 //  ICON
 //
 
-APPLICATION_ICON        ICON DISCARDABLE "svcicon.ico"
+APPLICATION_ICON        ICON DISCARDABLE "resource\\svcicon.ico"
 
-DEFAULT_SERVICE_ICON    ICON DISCARDABLE "svc.ico"
-//UAC_ICON                ICON DISCARDABLE "uac.ico"
-MINI_UAC_ICON           ICON DISCARDABLE "miniuac.ico"
+DEFAULT_SERVICE_ICON    ICON DISCARDABLE "resource\\svc.ico"
+//UAC_ICON                ICON DISCARDABLE "resource\\uac.ico"
+MINI_UAC_ICON           ICON DISCARDABLE "resource\\miniuac.ico"
 
-DO_START_ICON           ICON DISCARDABLE "start.ico"
-DO_PAUSE_ICON           ICON DISCARDABLE "pause.ico"
-DO_STOP_ICON            ICON DISCARDABLE "stop.ico"
-DO_RESUME_ICON          ICON DISCARDABLE "resume.ico"
-DO_RESTART_ICON         ICON DISCARDABLE "restart.ico"
-//DISPLAY_PROPERTY_ICON   ICON DISCARDABLE "property.ico"
-DO_CLOSE_ICON           ICON DISCARDABLE "close.ico"
+DO_START_ICON           ICON DISCARDABLE "resource\\start.ico"
+DO_PAUSE_ICON           ICON DISCARDABLE "resource\\pause.ico"
+DO_STOP_ICON            ICON DISCARDABLE "resource\\stop.ico"
+DO_RESUME_ICON          ICON DISCARDABLE "resource\\resume.ico"
+DO_RESTART_ICON         ICON DISCARDABLE "resource\\restart.ico"
+//DISPLAY_PROPERTY_ICON   ICON DISCARDABLE "resource\\property.ico"
+DO_CLOSE_ICON           ICON DISCARDABLE "resource\\close.ico"
 
-START_PENDING_ICON      ICON DISCARDABLE "start_pending.ico"
-RUNNING_ICON            ICON DISCARDABLE "running.ico"
-PAUSE_PENDING_ICON      ICON DISCARDABLE "pause_pending.ico"
-PAUSED_ICON             ICON DISCARDABLE "paused.ico"
-CONTINUE_PENDING_ICON   ICON DISCARDABLE "continue_pending.ico"
-STOP_PENDING_ICON       ICON DISCARDABLE "stop_pending.ico"
-STOPPED_ICON            ICON DISCARDABLE "stopped.ico"
+START_PENDING_ICON      ICON DISCARDABLE "resource\\start_pending.ico"
+RUNNING_ICON            ICON DISCARDABLE "resource\\running.ico"
+PAUSE_PENDING_ICON      ICON DISCARDABLE "resource\\pause_pending.ico"
+PAUSED_ICON             ICON DISCARDABLE "resource\\paused.ico"
+CONTINUE_PENDING_ICON   ICON DISCARDABLE "resource\\continue_pending.ico"
+STOP_PENDING_ICON       ICON DISCARDABLE "resource\\stop_pending.ico"
+STOPPED_ICON            ICON DISCARDABLE "resource\\stopped.ico"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -124,8 +124,8 @@ NOTIFYICON_MENU MENU
 //
 
 1 VERSIONINFO
-FILEVERSION 1, 0, 4, 0
-PRODUCTVERSION 1, 0, 4, 0
+FILEVERSION VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD, 0
+PRODUCTVERSION VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD, 0
 FILEOS 0x00010004L // == VOS__WINDOWS32
 FILETYPE 0x00000001L // == VFT_APP
 {
@@ -133,15 +133,15 @@ FILETYPE 0x00000001L // == VFT_APP
  {
   BLOCK "041104B0"
   {
-   VALUE "Comments", "http://tricklib.com/cxx/ex/svcicon/\000"
+   VALUE "Comments", "https://github.com/wraith13/svcicon/\000"
    VALUE "CompanyName", "TrickPalace\000"
-   VALUE "FileDescription", "Service Icon\000"
-   VALUE "FileVersion", "1.04\000"
-   VALUE "InternalName", "Service Icon\000"
-   VALUE "LegalCopyright", "Copyright (C) 2007 Wraith the Trickster.\000"
+   VALUE "FileDescription", "svcicon\000"
+   VALUE "FileVersion", VERSION_STRING "\000"
+   VALUE "InternalName", "svcicon\000"
+   VALUE "LegalCopyright", "Copyright (C) 2007-2017 Wraith the Trickster.\000"
    VALUE "OriginalFilename", "svcicon.exe\000"
-   VALUE "ProductName", "Service Icon\000"
-   VALUE "ProductVersion", "1.04\000"
+   VALUE "ProductName", "svcicon\000"
+   VALUE "ProductVersion", VERSION_STRING "\000"
   }
 
  }
