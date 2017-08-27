@@ -701,7 +701,7 @@ namespace service_icon
         //  サービスの取得
         //
         DWORD request_rights = SC_MANAGER_ALL_ACCESS;
-        SC_HANDLE service_manager = OpenSCManagerW(machine_name, NULL, request_rights);
+        service_manager = OpenSCManagerW(machine_name, NULL, request_rights);
         is_admin_mode = service_manager;
         if (!is_admin_mode)
         {
@@ -846,6 +846,14 @@ namespace service_icon
             NULL
         );
     }
+	void close()
+	{
+		if (service_manager)
+		{
+			CloseServiceHandle(service_manager);
+			service_manager = NULL;
+		}
+	}
 
     //
     //  権限の昇格
@@ -1370,7 +1378,8 @@ namespace service_icon
                 OutputDebugString(_T("CreateWindow: faild"));
                 OutputDebugString(make_error_message().c_str());
             }
-        }
+			close();
+		}
         else
         {
             MessageBoxW
