@@ -813,7 +813,7 @@ namespace service_icon
 #   pragma warning(disable:4302)
 #   pragma warning(disable:4311)
 #endif
-                mii.dwItemData = (DWORD)icon; // ←mii.hbmpItem でビットマップを使う場合にはいらないが、WM_THEMECHANGED に備えて保存しておく。
+                mii.dwItemData = (ULONG_PTR)icon; // ←mii.hbmpItem でビットマップを使う場合にはいらないが、WM_THEMECHANGED に備えて保存しておく。
 #if defined(_MSC_VER)
 #   pragma warning(pop)
 #endif
@@ -884,10 +884,15 @@ namespace service_icon
                 params += icon_index;
             }
         }
+#if defined(_MSC_VER)
+#   pragma warning(push)
+#   pragma warning(disable:4302)
+#   pragma warning(disable:4311)
+#endif
         if (32 < (int)ShellExecuteW(hwnd, L"runas", this_file_name, params.c_str(), NULL, SW_SHOW))
         {
             //  新しいインスタンスの作成に成功した(※)のでこのインスタンスは終了する。
-            PostMessage(hwnd, WM_CLOSE, NULL, NULL);
+            PostMessage(hwnd, WM_CLOSE, 0, 0);
             //  ※ただし新しいインスタンスが昇格できているとは限らない。
         }
         else
@@ -900,7 +905,10 @@ namespace service_icon
                 MB_ICONEXCLAMATION |MB_OK
             );
         }
-        //  Windows XP で昇格にトライした時に元のユーザのまま新しいインスタンス
+#if defined(_MSC_VER)
+#   pragma warning(pop)
+#endif
+                //  Windows XP で昇格にトライした時に元のユーザのまま新しいインスタンス
         //  を起動するとなぜかそのインスタンスでは ShellExecute がまともに動作
         //  しなくなる・・・なぜ？
     }
