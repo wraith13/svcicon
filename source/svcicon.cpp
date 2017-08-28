@@ -588,7 +588,7 @@ BOOL control_notify_icon(DWORD message, HWND owner, UINT id, LPCWSTR caption = N
         sizeof(NOTIFYICONDATA),
         owner,
         id,
-        ((NIM_DELETE != message) ? NIF_MESSAGE: 0) | ((caption) ? NIF_TIP: 0) | ((icon) ? NIF_ICON: 0),
+        (UINT)(((NIM_DELETE != message) ? NIF_MESSAGE: 0) | ((caption) ? NIF_TIP: 0) | ((icon) ? NIF_ICON: 0)),
         WM_NOTIFYICON_BASE +id,
         icon,
     };
@@ -808,7 +808,15 @@ namespace service_icon
                     }
                 }
                 mii.fMask = MIIM_DATA |MIIM_BITMAP;
+#if defined(_MSC_VER)
+#   pragma warning(push)
+#   pragma warning(disable:4302)
+#   pragma warning(disable:4311)
+#endif
                 mii.dwItemData = (DWORD)icon; // ←mii.hbmpItem でビットマップを使う場合にはいらないが、WM_THEMECHANGED に備えて保存しておく。
+#if defined(_MSC_VER)
+#   pragma warning(pop)
+#endif
 #if 0x0600 <= WINVER
                 if (is_enabled_theme)
                 {
