@@ -86,7 +86,7 @@ DO_STOP_ICON            ICON DISCARDABLE "resource\\stop.ico"
 DO_RESUME_ICON          ICON DISCARDABLE "resource\\resume.ico"
 DO_RESTART_ICON         ICON DISCARDABLE "resource\\restart.ico"
 //DISPLAY_PROPERTY_ICON   ICON DISCARDABLE "resource\\property.ico"
-DO_CLOSE_ICON           ICON DISCARDABLE "resource\\close.ico"
+//DO_CLOSE_ICON           ICON DISCARDABLE "resource\\close.ico"
 
 START_PENDING_ICON      ICON DISCARDABLE "resource\\start_pending.ico"
 RUNNING_ICON            ICON DISCARDABLE "resource\\running.ico"
