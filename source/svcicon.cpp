@@ -622,6 +622,109 @@ BOOL control_notify_icon(DWORD message, HWND owner, UINT id, LPCWSTR caption = N
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+//  高DPI対応＆マルチDPI対応
+//
+
+class dpi_cache
+{
+private:
+    UINT dpi_x;
+    UINT dpi_y; 
+
+public:
+    //typedef HRESULT (WINAPI* GetDpiForMonitor_api_type)(HMONITOR hmonitor, MONITOR_DPI_TYPE dpiType, UINT * dpiX, UINT * dpiY);
+    typedef HRESULT (WINAPI* GetDpiForMonitor_api_type)(HMONITOR hmonitor, int dpiType, UINT * dpiX, UINT * dpiY);
+    GetDpiForMonitor_api_type pGetDpiForMonitor;
+
+    dpi_cache()
+        :dpi_x(96)
+        ,dpi_y(96)
+    {
+        HMODULE user32_dll = GetModuleHandleW(L"user32.dll");
+        typedef HRESULT (WINAPI* SetProcessDpiAwarenessInternal_api_type)(DWORD);
+        auto pSetProcessDpiAwarenessInternal = (SetProcessDpiAwarenessInternal_api_type)GetProcAddress(user32_dll, "SetProcessDpiAwarenessInternal");
+        if
+        (
+            NULL == pSetProcessDpiAwarenessInternal ||
+            (
+                S_OK != pSetProcessDpiAwarenessInternal(2) &&   // 2 means Process_Per_Monitor_DPI_Aware
+                S_OK != pSetProcessDpiAwarenessInternal(1)      // 1 means Process_Per_Monitor_DPI_Aware
+            )
+        )
+        {
+            typedef BOOL (WINAPI* SetProcessDPIAware_api_type)(void);
+            auto pSetProcessDPIAware = (SetProcessDPIAware_api_type)GetProcAddress(user32_dll, "SetProcessDPIAware");
+            if (NULL != pSetProcessDPIAware)
+            {
+                pSetProcessDPIAware();
+            }
+        }
+    
+        HMODULE shcore_dll = LoadLibraryW(L"shcore.dll");
+        if (NULL != (HMODULE)shcore_dll)
+        {
+            pGetDpiForMonitor = (GetDpiForMonitor_api_type)GetProcAddress(shcore_dll, "GetDpiForMonitor");
+            FreeLibrary(shcore_dll);
+        }
+        else
+        {
+            pGetDpiForMonitor = nullptr;
+        }
+    }
+
+    bool update(HWND hwnd) // call from WM_CREATE, WM_SETTINGCHANGE, WM_DPICHANGED
+    {
+        UINT old_dpi_x = dpi_x;
+        UINT old_dpi_y = dpi_y;
+        
+        if (nullptr != pGetDpiForMonitor)
+        {
+            pGetDpiForMonitor
+            (
+                MonitorFromWindow
+                (
+                    hwnd,
+                    MONITOR_DEFAULTTONEAREST
+                ),
+                0, // means MDT_EFFECTIVE_DPI
+                &dpi_x,
+                &dpi_y
+            );
+        }
+        else
+        {
+            HDC dc = GetWindowDC(hwnd);
+            dpi_x = GetDeviceCaps(dc, LOGPIXELSX);
+            dpi_y = GetDeviceCaps(dc, LOGPIXELSY);
+            ReleaseDC(hwnd, dc);
+        }
+        
+        return
+            old_dpi_x != dpi_x ||
+            old_dpi_y != dpi_y;
+    }
+    
+    UINT GetDpiX() const
+    {
+        return dpi_x;
+    }
+    UINT GetDpiY() const
+    {
+        return dpi_y;
+    }
+    double GetRateX() const
+    {
+        return dpi_x /96.0;
+    }
+    double GetRateY() const
+    {
+        return dpi_y /96.0;
+    }
+};
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 //  service icon
 //
 
@@ -640,6 +743,9 @@ namespace service_icon
     const UINT TIMER_ID = 100;
     HMODULE imageres_dll = NULL;
     
+    int argc;
+    LPWSTR *args;
+
     //
     //  notify icon
     //
@@ -674,7 +780,12 @@ namespace service_icon
     DWORD prev_status = 0;
     bool is_admin_mode = false;
     
-#if 0x0600 <= WINVER
+    //
+    //  dpi
+    //
+    dpi_cache dpi;
+    
+    #if 0x0600 <= WINVER
     inline bool is_vista_or_later()
     {
         OSVERSIONINFO osvi;
@@ -751,17 +862,6 @@ namespace service_icon
             MessageBoxW(NULL, buffer, application_name, MB_ICONSTOP |MB_OK);
             return NULL;
         }
-        
-        //
-        //  ステータス表示用アイコンの作成
-        //
-        icon_table[SERVICE_START_PENDING]     = make_status_icon(START_PENDING_ICON);
-        icon_table[SERVICE_RUNNING]           = make_status_icon(RUNNING_ICON);
-        icon_table[SERVICE_PAUSE_PENDING]     = make_status_icon(PAUSE_PENDING_ICON);
-        icon_table[SERVICE_PAUSED]            = make_status_icon(PAUSED_ICON);
-        icon_table[SERVICE_CONTINUE_PENDING]  = make_status_icon(CONTINUE_PENDING_ICON);
-        icon_table[SERVICE_STOP_PENDING]      = make_status_icon(STOP_PENDING_ICON);
-        icon_table[SERVICE_STOPPED]           = make_status_icon(STOPPED_ICON);
         
         //
         //  ステータス表示用テキストの準備
@@ -1030,6 +1130,58 @@ namespace service_icon
         }
     }
     
+    void load_base_icon()
+    {
+        if (3 <= argc)
+        {
+            icon_file_name = args[2];
+            if (4 <= argc)
+            {
+                icon_index = args[3];
+                ExtractIconExW(icon_file_name, _wtoi(icon_index), NULL, &base_icon, 1);
+            }
+            else
+            {
+                ExtractIconExW(icon_file_name, 0, NULL, &base_icon, 1);
+            }
+        }
+        else
+        {
+            base_icon = load_icon(DEFAULT_SERVICE_ICON);
+        }
+    }
+    
+    void update_icon()
+    {
+        smallicon_size.cx = (UINT)(GetSystemMetrics(SM_CXSMICON) *dpi.GetRateX());
+        smallicon_size.cy = (UINT)(GetSystemMetrics(SM_CYSMICON) *dpi.GetRateY());
+
+        load_base_icon();
+
+        //
+        //  ステータス表示用アイコンの作成
+        //
+        icon_table[SERVICE_START_PENDING]     = make_status_icon(START_PENDING_ICON);
+        icon_table[SERVICE_RUNNING]           = make_status_icon(RUNNING_ICON);
+        icon_table[SERVICE_PAUSE_PENDING]     = make_status_icon(PAUSE_PENDING_ICON);
+        icon_table[SERVICE_PAUSED]            = make_status_icon(PAUSED_ICON);
+        icon_table[SERVICE_CONTINUE_PENDING]  = make_status_icon(CONTINUE_PENDING_ICON);
+        icon_table[SERVICE_STOP_PENDING]      = make_status_icon(STOP_PENDING_ICON);
+        icon_table[SERVICE_STOPPED]           = make_status_icon(STOPPED_ICON);
+    }
+
+    void update_dpi(HWND hwnd)
+    {
+        if (dpi.update(hwnd))
+        {
+            update_icon();
+        }
+    }
+
+#if !defined(WM_DPICHANGED)
+#define WM_DPICHANGED                   0x02E0
+#endif
+    
     LRESULT CALLBACK window_procedure
     (
         HWND hwnd,
@@ -1043,6 +1195,8 @@ namespace service_icon
         
         case WM_CREATE:
             {
+                dpi.update(hwnd);
+                update_icon();
                 DWORD current_status = target_service->get_status();
                 if (control_notify_icon(NIM_ADD, hwnd, NOTIFYICON_ID, make_icon_caption(current_status), get_status_icon(current_status)))
                 {
@@ -1064,6 +1218,14 @@ namespace service_icon
             }
             break;
 
+        case WM_SETTINGCHANGE:
+            update_dpi(hwnd);
+            break;
+        
+        case WM_DPICHANGED:
+            update_dpi(hwnd);
+            break;
+            
         case WM_MEASUREITEM:
             {
                 MEASUREITEMSTRUCT *mi = (MEASUREITEMSTRUCT*)lParam;
@@ -1333,8 +1495,7 @@ namespace service_icon
         smallicon_size.cx = GetSystemMetrics(SM_CXSMICON);
         smallicon_size.cy = GetSystemMetrics(SM_CYSMICON);
                     
-        int argc;
-        LPWSTR *args = CommandLineToArgvW(GetCommandLineW(), &argc);
+        args = CommandLineToArgvW(GetCommandLineW(), &argc);
         LPWSTR action = NULL;
         
         this_file_name = args[0];
@@ -1359,24 +1520,6 @@ namespace service_icon
             else
             {
                 machine_name = NULL;
-            }
-            
-            if (3 <= argc)
-            {
-                icon_file_name = args[2];
-                if (4 <= argc)
-                {
-                    icon_index = args[3];
-                    ExtractIconExW(icon_file_name, _wtoi(icon_index), NULL, &base_icon, 1);
-                }
-                else
-                {
-                    ExtractIconExW(icon_file_name, 0, NULL, &base_icon, 1);
-                }
-            }
-            else
-            {
-                base_icon = load_icon(DEFAULT_SERVICE_ICON);
             }
             
             if (regist() && create())
