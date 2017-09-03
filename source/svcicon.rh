@@ -90,7 +90,8 @@
 #define DO_RESUME_ICON          204
 #define DO_RESTART_ICON         205
 #define DISPLAY_PROPERTY_ICON   206
-#define DO_CLOSE_ICON           207
+#define DO_VERSION_INFO         207
+#define DO_CLOSE_ICON           208
 
 #define START_PENDING_ICON      301
 #define RUNNING_ICON            302

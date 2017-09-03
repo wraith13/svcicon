@@ -109,7 +109,7 @@
 #pragma warning(disable: 4996)
 #endif
 
-LPCWSTR application_name = L"サービス アイコン";
+LPCWSTR application_name = L"svcicon";
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -741,6 +741,7 @@ namespace service_icon
     bool is_enabled_theme = false;
 #endif
     const UINT TIMER_ID = 100;
+    HMODULE user32_dll = NULL;
     HMODULE imageres_dll = NULL;
     
     int argc;
@@ -806,6 +807,8 @@ namespace service_icon
     {
         switch(id)
         {
+        case DO_VERSION_INFO:
+            return load_icon(user32_dll, 104);
         case DO_CLOSE_ICON:
             return load_icon(imageres_dll, 5102);
         default:
@@ -1321,6 +1324,24 @@ namespace service_icon
             //case DISPLAY_PROPERTY_ICON:
                 //break;
             
+            case DO_VERSION_INFO:
+            {
+                WCHAR filename[1024];
+                GetModuleFileNameW(hInstance, filename, ARRAY_SIZE(filename) -1);
+                MessageBoxW
+                (
+                    hwnd,
+                    (
+                        std::wstring(application_name) +L" " +VERSION_WSTRING +L"\r\n"
+                        +L"\r\n"
+                        +filename
+                    ).c_str(),
+                    L"バージョン情報",
+                    MB_ICONINFORMATION |MB_OK
+                );
+            }
+            break;
+            
             case DO_CLOSE_ICON:
                 PostMessage(hwnd, WM_CLOSE, 0, 0);
                 break;
@@ -1489,6 +1510,8 @@ namespace service_icon
             IsThemeActive = (BOOL (*)())GetProcAddress(uxtheme_dll, "IsThemeActive");
         }
 #endif
+
+        user32_dll = GetModuleHandleW(L"user32.dll");
         imageres_dll = LoadLibraryW(L"imageres.dll");
 
         WM_taskbarcreated = RegisterWindowMessageW(L"TaskbarCreated");
