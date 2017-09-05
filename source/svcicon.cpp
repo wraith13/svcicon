@@ -472,7 +472,7 @@ UINT get_ILC_color_flag(HDC dc)
 //  アイコン
 //
 
-HICON create_merge_icon(SIZE icon_size, HICON icon1, HICON icon2)
+HICON create_merge_icon(SIZE icon_size, HICON icon1, HICON icon2, COLORREF backgroud_color)
 {
 #if 0
 // アルファが黒ずむバージョン
@@ -482,8 +482,8 @@ HICON create_merge_icon(SIZE icon_size, HICON icon1, HICON icon2)
 // アルファが黒ずむ問題の仮対策(お茶濁し)バージョン
     // Windows XP で ILC_COLOR32 を指定するとオーバーレイイメージが被る部分が欠けたりする・・・なぜ？
     HIMAGELIST source_image = ImageList_Create(icon_size.cx, icon_size.cy, ILC_COLOR24 |ILC_MASK, 2, 1);
-    ImageList_SetBkColor(source_image, 0x00DDDDDD);
-#endif
+    ImageList_SetBkColor(source_image, backgroud_color);
+    #endif
     ImageList_AddIcon(source_image, icon1);
     ImageList_AddIcon(source_image, icon2);
     HIMAGELIST merge_image = ImageList_Merge(source_image, 0, source_image, 1, 0, 0);
@@ -803,6 +803,11 @@ namespace service_icon
     {
         return (HICON)LoadImage(module, MAKEINTRESOURCE(id), IMAGE_ICON, smallicon_size.cx, smallicon_size.cy, LR_DEFAULTCOLOR);
     }
+    inline HICON remove_icon_alpha(HICON icon)
+    {
+        //  アイコンマージ処理で alpha が適切に処理されない問題を利用して、メニューの初期状態で酷い状態になる問題を回避
+        return create_merge_icon(smallicon_size, icon, icon, 0x00DDDDDD);
+    }
     inline HICON load_icon(int id)
     {
         switch(id)
@@ -818,7 +823,7 @@ namespace service_icon
 
     inline HICON make_status_icon(DWORD icon_id)
     {
-        return create_merge_icon(smallicon_size, base_icon, load_icon(icon_id));
+        return create_merge_icon(smallicon_size, base_icon, load_icon(icon_id), 0x00444444);
     }
     HWND create()
     {
@@ -918,9 +923,16 @@ namespace service_icon
                     case DO_STOP_ICON:
                     case DO_RESUME_ICON:
                     case DO_RESTART_ICON:
-                        icon = create_merge_icon(smallicon_size, icon, uac_icon);
+                        icon = create_merge_icon(smallicon_size, icon, uac_icon, 0x00DDDDDD);
+                        break;
+                    default:
+                        icon = remove_icon_alpha(icon);
                         break;
                     }
+                }
+                else
+                {
+                    icon = remove_icon_alpha(icon);
                 }
                 mii.fMask = MIIM_DATA |MIIM_BITMAP;
 #if defined(_MSC_VER)
