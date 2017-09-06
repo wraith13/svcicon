@@ -799,7 +799,7 @@ namespace service_icon
         return IsThemeActive && IsThemeActive();
     }
 #endif
-    inline HICON load_icon(HMODULE module, int id)
+    inline HICON load_icon(HMODULE module, UINT id)
     {
         return (HICON)LoadImage(module, MAKEINTRESOURCE(id), IMAGE_ICON, smallicon_size.cx, smallicon_size.cy, LR_DEFAULTCOLOR);
     }
@@ -808,10 +808,12 @@ namespace service_icon
         //  アイコンマージ処理で alpha が適切に処理されない問題を利用して、メニューの初期状態で酷い状態になる問題を回避
         return create_merge_icon(smallicon_size, icon, icon, 0x00DDDDDD);
     }
-    inline HICON load_icon(int id)
+    inline HICON load_icon(UINT id)
     {
         switch(id)
         {
+        case UAC_ICON:
+            return load_icon(user32_dll, 106);
         case DO_VERSION_INFO:
             return load_icon(user32_dll, 104);
         case DO_CLOSE_ICON:
@@ -821,7 +823,7 @@ namespace service_icon
         }
     }
 
-    inline HICON make_status_icon(DWORD icon_id)
+    inline HICON make_status_icon(UINT icon_id)
     {
         return create_merge_icon(smallicon_size, base_icon, load_icon(icon_id), 0x00444444);
     }
