@@ -1599,7 +1599,7 @@ namespace service_icon
                 L"\n"
                 L"usage: svcicon [サービス名[@コンピュータ名] [アイコンファイル名 [アイコンインデックス値]]]\n"
                 L"\n"
-                L"cf. http://tricklib.com/cxx/ex/svcicon/\n",
+                L"cf. https://github.com/wraith13/svcicon\n",
                 application_name,
                 MB_ICONINFORMATION |MB_OK
             );
