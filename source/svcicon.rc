@@ -7,56 +7,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-//  ■ svcicon.rc
-//      http://tricklib.com/cxx/ex/svcicon/svcicon.rc
+//  ■ プロジェクトページ
+//      https://github.com/wraith13/svcicon
 //
-//  □ 関連ファイル
-//      ソースファイル
-//      http://tricklib.com/cxx/ex/svcicon/svcicon.cpp
-//      リソースヘッダファイル
-//      http://tricklib.com/cxx/ex/svcicon/svcicon.rh
-//      アプリケーションアイコン
-//      http://tricklib.com/cxx/ex/svcicon/svcicon.ico
-//      デフォルトサービスアイコン
-//      http://tricklib.com/cxx/ex/svcicon/svc.ico
-//      UACオーバーレイアイコン
-//      http://tricklib.com/cxx/ex/svcicon/miniuac.ico
-//      "start"アイコン
-//      http://tricklib.com/cxx/ex/svcicon/start.ico
-//      "pause"アイコン
-//      http://tricklib.com/cxx/ex/svcicon/pause.ico
-//      "stop"アイコン
-//      http://tricklib.com/cxx/ex/svcicon/stop.ico
-//      "resume"アイコン
-//      http://tricklib.com/cxx/ex/svcicon/resume.ico
-//      "restart"アイコン
-//      http://tricklib.com/cxx/ex/svcicon/restart.ico
-//      "閉じる"アイコン
-//      http://tricklib.com/cxx/ex/svcicon/close.ico
-//      "start pending"オーバーレイアイコン
-//      http://tricklib.com/cxx/ex/svcicon/start_pending.ico
-//      "running"オーバーレイアイコン
-//      http://tricklib.com/cxx/ex/svcicon/running.ico
-//      "pause pending"オーバーレイアイコン
-//      http://tricklib.com/cxx/ex/svcicon/pause_pending.ico
-//      "paused"オーバーレイアイコン
-//      http://tricklib.com/cxx/ex/svcicon/paused.ico
-//      "continue pending"オーバーレイアイコン
-//      http://tricklib.com/cxx/ex/svcicon/continue_pending.ico
-//      "stop pending"オーバーレイアイコン
-//      http://tricklib.com/cxx/ex/svcicon/stop_pending.ico
-//      "stopped"オーバーレイアイコン
-//      http://tricklib.com/cxx/ex/svcicon/stopped.ico
-//      全ファイルパック
-//      http://tricklib.com/cxx/ex/svcicon/svcicon.zip
+//  ■ ライセンス情報
+//      https://github.com/wraith13/svcicon/blob/master/LICENSE_1_0.txt
 //
-//  □ リファレンス・サポートページ
-//      http://tricklib.com/cxx/ex/svcicon/
-//
-//  □ ライセンス情報
-//      http://tricklib.com/license.htm
-//
-//  □ コンパイル方法
+//  ■ コンパイル方法
 //      case Borland C++
 //          brcc32 svcicon.rc
 //      case Visual C++
