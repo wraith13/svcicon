@@ -700,6 +700,7 @@ namespace service_icon
     const UINT TIMER_ID = 100;
     HMODULE user32_dll = NULL;
     HMODULE imageres_dll = NULL;
+    HMODULE filemgmt_dll = NULL;
     
     int argc;
     LPWSTR *args;
@@ -769,6 +770,8 @@ namespace service_icon
     {
         switch(id)
         {
+        case DEFAULT_SERVICE_ICON:
+            return load_icon(filemgmt_dll, 236);
         case UAC_ICON:
             return load_icon(user32_dll, 106);
         case DO_VERSION_INFO:
@@ -1485,6 +1488,7 @@ namespace service_icon
 
         user32_dll = GetModuleHandleW(L"user32.dll");
         imageres_dll = LoadLibraryW(L"imageres.dll");
+        filemgmt_dll = LoadLibraryW(L"filemgmt.dll");
 
         WM_taskbarcreated = RegisterWindowMessageW(L"TaskbarCreated");
         smallicon_size.cx = GetSystemMetrics(SM_CXSMICON);
@@ -1564,6 +1568,7 @@ namespace service_icon
         
         LocalFree(args);
         FreeLibrary(imageres_dll);
+        FreeLibrary(filemgmt_dll);
         
 #if 0x0600 <= WINVER
         CoUninitialize();
