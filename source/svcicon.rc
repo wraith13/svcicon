@@ -31,9 +31,9 @@
 //  ICON
 //
 
-APPLICATION_ICON        ICON DISCARDABLE "resource\\svcicon.ico"
+APPLICATION_ICON        ICON DISCARDABLE "resource\\gear.ico"
 
-//DEFAULT_SERVICE_ICON    ICON DISCARDABLE "resource\\svc.ico"
+DEFAULT_SERVICE_ICON    ICON DISCARDABLE "resource\\gear.ico"
 //UAC_ICON                ICON DISCARDABLE "resource\\uac.ico"
 MINI_UAC_ICON           ICON DISCARDABLE "resource\\miniuac.ico"
 
