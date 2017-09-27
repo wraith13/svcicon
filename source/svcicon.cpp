@@ -770,8 +770,8 @@ namespace service_icon
     {
         switch(id)
         {
-        case DEFAULT_SERVICE_ICON:
-            return load_icon(filemgmt_dll, 236);
+        //case DEFAULT_SERVICE_ICON:
+        //    return load_icon(filemgmt_dll, 236);
         case UAC_ICON:
             return load_icon(user32_dll, 106);
         case DO_VERSION_INFO:
