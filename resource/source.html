@@ -1,7 +1,295 @@
-<h1>icon resource source</h1>
-
-※markdown にすると markdown レンダラのバグにより、リンク中の %22 が削られて無効な URL になってしまうことがあるので注意
-
-<ul>
-    <li><a href='http://wraith13.github.io/roundpattern/roundpattern.htm?params=%7B%22backgroundColor%22:%22#FFFFFF%22,%22rounds%22:%5B%7B%22baseAngle%22:0.038461538461538464,%22denominator%22:13,%22tracks%22:%5B%7B%22angle%22:-0.03333333333333333,%22radius%22:312%7D,%7B%22angle%22:0.3666666666666667,%22radius%22:312%7D,%7B%22angle%22:0.5333333333333333,%22radius%22:262%7D,%7B%22angle%22:0.7999999999999999,%22radius%22:262%7D%5D,%22fillStyle%22:%22#4488EE%22%7D,%7B%22baseAngle%22:0.038461538461538464,%22denominator%22:13,%22tracks%22:%5B%7B%22angle%22:0.03333333333333333,%22radius%22:288%7D,%7B%22angle%22:0.3,%22radius%22:288%7D,%7B%22angle%22:0.4666666666666666,%22radius%22:238%7D,%7B%22angle%22:0.8666666666666667,%22radius%22:238%7D%5D,%22fillStyle%22:%22#BBBBDD%22%7D,%7B%22denominator%22:0,%22tracks%22:%5B%7B%22radius%22:100%7D%5D,%22fillStyle%22:%22#4488EE%22%7D,%7B%22denominator%22:0,%22tracks%22:%5B%7B%22radius%22:76%7D%5D,%22fillStyle%22:%22#FFFFFF%22%7D%5D%7D'>gear</a> ( <a href='http://wraith13.github.io/roundpattern/roundpattern.htm?params=%7B%22backgroundColor%22:%22#FFFFFF%22,%22rounds%22:%5B%7B%22baseAngle%22:0.038461538461538464,%22denominator%22:13,%22tracks%22:%5B%7B%22angle%22:-0.03333333333333333,%22radius%22:312%7D,%7B%22angle%22:0.3666666666666667,%22radius%22:312%7D,%7B%22angle%22:0.5333333333333333,%22radius%22:262%7D,%7B%22angle%22:0.7999999999999999,%22radius%22:262%7D%5D,%22fillStyle%22:%22#4488EE%22%7D,%7B%22baseAngle%22:0.038461538461538464,%22denominator%22:13,%22tracks%22:%5B%7B%22angle%22:0.03333333333333333,%22radius%22:288%7D,%7B%22angle%22:0.3,%22radius%22:288%7D,%7B%22angle%22:0.4666666666666666,%22radius%22:238%7D,%7B%22angle%22:0.8666666666666667,%22radius%22:238%7D%5D,%22fillStyle%22:%22#BBBBDD%22%7D,%7B%22denominator%22:0,%22tracks%22:%5B%7B%22radius%22:100%7D%5D,%22fillStyle%22:%22#4488EE%22%7D,%7B%22denominator%22:0,%22tracks%22:%5B%7B%22radius%22:76%7D%5D,%22fillStyle%22:%22#FFFFFF%22%7D,%7B%22baseAngle%22:0.25,%22denominator%22:3,%22tracks%22:%5B%7B%22angle%22:0,%22radius%22:30%7D,%7B%22type%22:%22arc%22,%22angle%22:0.5,%22radius%22:30%7D,%7B%22angle%22:0.5,%22radius%22:0%7D%5D,%22fillStyle%22:%22#080808%22%7D%5D%7D'>with center marker</a> )
-</li>
+<html>
+<head>
+<meta charset="utf-8">
+<title>wraith13.github.io</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<style>
+/*
+    parameter
+*/
+/*
+    overview layout
+*/
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+header,
+#body,
+footer {
+  width: 100vw;
+  white-space: nowrap;
+}
+.container {
+  margin: 0 auto;
+  padding: 0px 1rem;
+  max-width: 60rem;
+}
+header {
+  height: calc(1.9rem);
+  line-height: calc(1.9rem);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+#body {
+  margin: -2.4rem auto -2.4rem auto;
+  min-height: 100vh;
+}
+#body .container {
+  padding-top: 2.9rem;
+  padding-bottom: 2.9rem;
+}
+footer {
+  margin-top: -2.4rem;
+  height: calc(1.9rem);
+  line-height: calc(1.9rem);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+/*
+    global theme
+*/
+body {
+  color: #301818;
+  background-color: #FFF8F0;
+  font-family: "Meiryo UI";
+}
+a {
+  color: #A05050;
+}
+a:hover {
+  color: #E08080;
+}
+ul {
+  margin: 0px 0.5rem;
+  padding: 0px;
+  list-style-position: inside;
+}
+/*
+    header
+*/
+header {
+  color: #FFF8F0;
+  background-color: #301818;
+  font-size: 1.3rem;
+}
+/*
+    body
+*/
+/*
+    footer
+*/
+footer {
+  color: #804040;
+  background-color: #FEEEDE;
+  font-size: 0.8rem;
+}
+footer ul {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+footer ul li {
+  display: inline;
+}
+footer ul li:not(:first-child)::before {
+  content: "|";
+  color: #FFC0C0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+footer a {
+  color: #C06060;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+    <header><div class="container">svcicon icon resource source</div></header>
+    <div id="body"><noscript>Enable JavaScript. This page requires JavaScript.</noscript></div>
+    <footer><div class="container">
+        <ul>
+            <li>svcicon</li>
+            <li>&copy; 2017 <a href="https://twitter.com/wraith13">@wraith13</a></li>
+            <li><a href="https://github.com/wraith13/svcicon">github</a></li>
+        </ul>
+    </div></footer>
+<script>
+        document.getElementById("body").innerHTML = "<div class=container>"
+        +"<ul>"
+                +"<li><A href='https://wraith13.github.io/roundpattern/roundpattern.htm?params="
+            +encodeURI(JSON.stringify(
+                {
+                    "backgroundColor": "#FFFFFF",
+                    "rounds":[
+                        {
+                            "baseAngle":3.0 / (13.0 *6.0),
+                            "denominator":13,
+                            "tracks":[
+                                {
+                                    "angle":-0.2 /6.0,
+                                    "radius":312
+                                },
+                                {
+                                    "angle":2.2 /6.0,
+                                    "radius":312
+                                },
+                                {
+                                    "angle":3.2 /6.0,
+                                    "radius":262
+                                },
+                                {
+                                    "angle":4.8 /6.0,
+                                    "radius":262
+                                }
+                            ],
+                            "fillStyle":"#4488EE"
+                        },
+                        {
+                            "baseAngle":3.0 / (13.0 *6.0),
+                            "denominator":13,
+                            "tracks":[
+                                {
+                                    "angle":0.2 /6.0,
+                                    "radius":288
+                                },
+                                {
+                                    "angle":1.8 /6.0,
+                                    "radius":288
+                                },
+                                {
+                                    "angle":2.8 /6.0,
+                                    "radius":238
+                                },
+                                {
+                                    "angle":5.2 /6.0,
+                                    "radius":238
+                                }
+                            ],
+                            "fillStyle":"#BBBBDD"
+                        },
+                        {
+                            "denominator":0,
+                            "tracks":[
+                                {
+                                    "radius":100
+                                },
+                            ],
+                            "fillStyle":"#4488EE"
+                        },
+                        {
+                            "denominator":0,
+                            "tracks":[
+                                {
+                                    "radius":76
+                                },
+                            ],
+                            "fillStyle":"#FFFFFF"
+                        }
+                    ]
+                }
+            ))
+            +"'>gear</a> ( "
+            +"<A href='https://wraith13.github.io/roundpattern/roundpattern.htm?params="
+            +encodeURI(JSON.stringify(
+                {
+                    "backgroundColor": "#FFFFFF",
+                    "rounds":[
+                        {
+                            "baseAngle":3.0 / (13.0 *6.0),
+                            "denominator":13,
+                            "tracks":[
+                                {
+                                    "angle":-0.2 /6.0,
+                                    "radius":312
+                                },
+                                {
+                                    "angle":2.2 /6.0,
+                                    "radius":312
+                                },
+                                {
+                                    "angle":3.2 /6.0,
+                                    "radius":262
+                                },
+                                {
+                                    "angle":4.8 /6.0,
+                                    "radius":262
+                                }
+                            ],
+                            "fillStyle":"#4488EE"
+                        },
+                        {
+                            "baseAngle":3.0 / (13.0 *6.0),
+                            "denominator":13,
+                            "tracks":[
+                                {
+                                    "angle":0.2 /6.0,
+                                    "radius":288
+                                },
+                                {
+                                    "angle":1.8 /6.0,
+                                    "radius":288
+                                },
+                                {
+                                    "angle":2.8 /6.0,
+                                    "radius":238
+                                },
+                                {
+                                    "angle":5.2 /6.0,
+                                    "radius":238
+                                }
+                            ],
+                            "fillStyle":"#BBBBDD"
+                        },
+                        {
+                            "denominator":0,
+                            "tracks":[
+                                {
+                                    "radius":100
+                                },
+                            ],
+                            "fillStyle":"#4488EE"
+                        },
+                        {
+                            "denominator":0,
+                            "tracks":[
+                                {
+                                    "radius":76
+                                },
+                            ],
+                            "fillStyle":"#FFFFFF"
+                        },
+                        {
+                            "baseAngle":3.0 / 12.0,
+                            "denominator":3,
+                            "tracks":[
+                                {
+                                    "angle":0.0 / 2.0,
+                                    "radius":30
+                                },
+                                {
+                                    "type": "arc",
+                                    "angle":1.0 /2.0,
+                                    "radius":30
+                                },
+                                {
+                                    "angle":1.0 /2.0,
+                                    "radius":0.0
+                                }
+                            ],
+                            "fillStyle":"#080808"
+                        }
+                    ]
+                }
+            ))
+            +"'>with center marker</a> ) </li>"
+        +"</ul>";
+        +"</div>";
+//</script>
+</body>
+</html>
