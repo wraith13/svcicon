@@ -1,0 +1,103 @@
+/*
+    parameter
+*/
+/*
+    overview layout
+*/
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+header,
+#body,
+footer {
+  width: 100vw;
+  white-space: nowrap;
+}
+.container {
+  margin: 0 auto;
+  padding: 0px 1rem;
+  max-width: 60rem;
+}
+header {
+  height: calc(1.9rem);
+  line-height: calc(1.9rem);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+#body {
+  margin: -2.4rem auto -2.4rem auto;
+  min-height: 100vh;
+}
+#body .container {
+  padding-top: 2.9rem;
+  padding-bottom: 2.9rem;
+}
+footer {
+  margin-top: -2.4rem;
+  height: calc(1.9rem);
+  line-height: calc(1.9rem);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+/*
+    global theme
+*/
+body {
+  color: #202020;
+  background-color: #F8F8FF;
+  font-family: "Meiryo UI";
+}
+a {
+  color: #5050C0;
+}
+a:hover {
+  color: #8080F0;
+}
+ul {
+  margin: 0px 0.5rem;
+  padding: 0px;
+  list-style-position: inside;
+}
+/*
+    header
+*/
+header {
+  color: #F8F8FF;
+  background-color: #202020;
+  font-size: 1.3rem;
+}
+/*
+    body
+*/
+/*
+    footer
+*/
+footer {
+  color: #4040A0;
+  background-color: #DDDDFF;
+  font-size: 0.8rem;
+}
+footer ul {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+footer ul li {
+  display: inline;
+}
+footer ul li:not(:first-child)::before {
+  content: "|";
+  color: #C0C0FF;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+footer a {
+  color: #6060D0;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
