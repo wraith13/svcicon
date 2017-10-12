@@ -350,6 +350,68 @@ footer a:hover {
                     }
                 ))
                 +"'>with center marker</a> ) </li>"
+                +"<li><A href='https://wraith13.github.io/roundpattern/roundpattern.htm?params="
+                +encodeURI(JSON.stringify(
+                    {
+                        "rounds":[
+                            {
+                                "baseAngle":0.125,
+                                "denominator":4,
+                                "tracks":[
+                                    {
+                                        "angle":0.0
+                                    },
+                                    {
+                                        "angle":1.0
+                                    }
+                                ],
+                                "fillStyle":"blue"
+                            }
+                        ]
+                    }
+                ))
+                +"'>stop</a> ( "
+                +"<A href='https://wraith13.github.io/roundpattern/roundpattern.htm?params="
+                +encodeURI(JSON.stringify(
+                    {
+                        "rounds":[
+                            {
+                                "baseAngle":0.125,
+                                "denominator":4,
+                                "tracks":[
+                                    {
+                                        "angle":0.0
+                                    },
+                                    {
+                                        "angle":1.0
+                                    }
+                                ],
+                                "fillStyle":"blue"
+                            },
+                            {
+                                "baseAngle":3.0 / 12.0,
+                                "denominator":3,
+                                "tracks":[
+                                    {
+                                        "angle":0.0 / 2.0,
+                                        "radius":30
+                                    },
+                                    {
+                                        "type": "arc",
+                                        "angle":1.0 /2.0,
+                                        "radius":30
+                                    },
+                                    {
+                                        "angle":1.0 /2.0,
+                                        "radius":0.0
+                                    }
+                                ],
+                                "fillStyle":"#080808"
+                            }
+                        ]
+                    }
+                ))
+                +"'>with center marker</a> ) </li>"
             +"</ul>";
         +"</div>";
 //</script>
